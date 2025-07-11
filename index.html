@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Viewer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Main Container holding sidebar and content -->
+    <div class="container">
+
+        <!-- Sidebar for listing articles -->
+        <div class="sidebar" id="sidebar">
+
+            <!-- Sidebar Header: title and subtitle -->
+            <div class="sidebar-header">
+                <div class="sidebar-title">Articles</div> <!-- Main title -->
+                <div class="sidebar-subtitle">Double-click for actions</div> <!-- Hint/subtext -->
+
+                <!-- Toggle button to collapse/expand sidebar -->
+                <button class="toggle-btn" id="toggleBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"></path> <!-- Left arrow icon -->
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Dynamic list of article items -->
+            <div class="article-list" id="articleList">
+                <!-- Articles will be injected here via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Main content area (displays selected article or welcome message) -->
+        <div class="main-content">
+            <div class="content-area" id="contentArea">
+
+                <!-- Welcome message when no article is selected -->
+                <div class="welcome-message">
+                    <h2>Welcome to Article Viewer</h2>
+                    <p>Select an article from the sidebar to start reading</p>
+                    <p>Double-click any article title for quick actions</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Dark overlay backdrop (used when tooltip is active) -->
+        <div class="backdrop" id="backdrop"></div>
+
+        <!-- Tooltip menu for article actions (copy, highlight, share) -->
+        <div class="tooltip" id="tooltip">
+            <div class="tooltip-menu">
+
+                <!-- Copy button -->
+                <button class="tooltip-btn copy" id="copyBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy
+                </button>
+
+                <!-- Highlight button -->
+                <button class="tooltip-btn highlight" id="highlightBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11H1l8-8 8 8h-8v8z"></path>
+                    </svg>
+                    Highlight
+                </button>
+
+                <!-- Share button -->
+                <button class="tooltip-btn share" id="shareBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                        <polyline points="16,6 12,2 8,6"></polyline>
+                        <line x1="12" y1="2" x2="12" y2="15"></line>
+                    </svg>
+                    Share
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
