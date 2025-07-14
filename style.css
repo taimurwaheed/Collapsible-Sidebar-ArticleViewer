@@ -1,0 +1,311 @@
+/* === Global Reset and Base Styles === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* === Layout Container === */
+.container {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+    width: 320px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+    transform: translateX(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 100;
+}
+
+/* Sidebar collapsed state */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* === Sidebar Header === */
+.sidebar-header {
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+}
+
+.sidebar-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sidebar-subtitle {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* === Toggle Button === */
+.toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.toggle-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed .toggle-btn svg {
+    transform: rotate(180deg);
+}
+
+/* === Article List Area === */
+.article-list {
+    padding: 20px;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+/* === Individual Article Items === */
+.article-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    user-select: none;
+}
+
+.article-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.article-item.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.article-item.highlighted {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    animation: highlight-pulse 0.5s ease;
+}
+
+/* Highlight animation for selected article */
+@keyframes highlight-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.article-title {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.article-excerpt {
+    font-size: 0.9em;
+    opacity: 0.7;
+    line-height: 1.4;
+}
+
+/* === Main Content Area === */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.content-area {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    min-height: calc(100vh - 120px);
+    position: relative;
+}
+
+/* === Article Content Header === */
+.content-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.content-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.content-meta {
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* === Main Article Body === */
+.content-body {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+}
+
+.content-body p {
+    margin-bottom: 20px;
+}
+
+/* === Tooltip Menu for Article Actions === */
+.tooltip {
+    position: absolute;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.tooltip.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.tooltip-menu {
+    display: flex;
+    gap: 8px;
+}
+
+.tooltip-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tooltip-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Button variations */
+.tooltip-btn.copy {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.tooltip-btn.highlight {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.tooltip-btn.share {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #333;
+}
+
+/* === Backdrop (blur background behind tooltip) === */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* === Welcome Message Styling === */
+.welcome-message {
+    text-align: center;
+    color: #666;
+    font-size: 1.2em;
+    margin-top: 100px;
+}
+
+.welcome-message h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /*For gradient color text we used -webkit*/
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* === Responsive Tweaks (Mobile) === */
+@media (max-width: 768px) {
+    .content-header {
+        font-size: 1rem;
+    }
+}
